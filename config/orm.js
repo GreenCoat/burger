@@ -29,7 +29,10 @@ var orm = {
 		query += " WHERE ";
 		query += condition;
 
-
+		connection.query(query, colVal, function(err, result){
+			if(err){throw err}
+			cb(result);
+		});
 	}
 }
 

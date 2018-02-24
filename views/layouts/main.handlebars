@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-		<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+		<link rel="stylesheet" href=".../public/assets/css/burger_style.css" type="text/css" />
 		<title>Eat-Da-Burger</title>
 		<script src="https://code.jquery.com/jquery.js"></script>
 	</head>
@@ -28,18 +28,23 @@
 			$(".create-form").on("submit", function(evt){
 				evt.preventDefault();
 
-				var newBurg = {
-					burger_name: $("burger").val().trim(),
-					devoured: false
-				};
+				var burgerName = $("#burger").val().trim();
 
-				$.ajax("api/burgers", {
-					type: "POST",
-					data: newBurg
-				}).then(
-					function(){
+				if(burgerName){
+					var newBurg = {
+						burger: burgerName,
+						devoured: false
+					};
+
+					$.ajax("api/burgers", {
+						type: "POST",
+						data: newBurg
+					}).then(function(){
 						location.reload();
-				   });
+				   	});
+				} else {
+					console.log("Please order a burger");	
+				}
 			});
 		});
 	</script>
